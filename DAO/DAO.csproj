@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6911D949-2E38-4108-86D1-CF6766546B6D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAO</RootNamespace>
+    <AssemblyName>DAO</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\DoAnWindow\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\DoAnWindow\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BAN.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BanDAO.cs" />
+    <Compile Include="CTHoaDonDAO.cs" />
+    <Compile Include="CT_HOADON.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DangNhap_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DsBanTrong_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSMonTheoNhom_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DSNVChuacoTK_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HDThanhToan_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HDTungBan_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HOADON.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HoaDonDAO.cs" />
+    <Compile Include="HoaDonThanhToanDAO.cs" />
+    <Compile Include="KiemTraCmnd_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KiemTraQuyen_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KiemTraTrungLap_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KTDoiMatKhau_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KTHoaDon_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KTNhomMon_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KTTaiKhoanNV_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KTTenban_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KTTrungLapMon_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayDanhSachBan_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LaydanhsachCT_HD_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayDanhSachHD_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayDanhSachMenu_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayDanhSachNhomMon_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayDanhSachNV_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayDanhSachTK_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayHDThanhToan_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayThongTinMon_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayThongTinTheoBan_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MENU.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonDAO.cs" />
+    <Compile Include="NguoiDungTK_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NHANVIEN.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVienDAO.cs" />
+    <Compile Include="NHOMMON.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NhomMonDAO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QLQuanCaFeModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLQuanCaFeModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QLQuanCaFeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QLQuanCaFeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLQuanCaFeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAIKHOAN.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaiKhoanDAO.cs" />
+    <Compile Include="TaiKhoanNV_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ThongKeMonDAO.cs" />
+    <Compile Include="ThongKe_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TimKiemHDTheoNgay_Result.cs">
+      <DependentUpon>QLQuanCaFeModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{4ebc8435-1dce-4b15-a49d-6ede3b1722f0}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="QLQuanCaFeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLQuanCaFeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="QLQuanCaFeModel.edmx.diagram">
+      <DependentUpon>QLQuanCaFeModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="QLQuanCaFeModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QLQuanCaFeModel.Context.cs</LastGenOutput>
+      <DependentUpon>QLQuanCaFeModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="QLQuanCaFeModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLQuanCaFeModel.edmx</DependentUpon>
+      <LastGenOutput>QLQuanCaFeModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

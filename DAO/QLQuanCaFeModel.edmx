@@ -1,0 +1,1573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuanLyQuanCafeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BAN">
+          <Key>
+            <PropertyRef Name="IDBan" />
+          </Key>
+          <Property Name="IDBan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenBan" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CT_HOADON">
+          <Key>
+            <PropertyRef Name="IDCTHD" />
+          </Key>
+          <Property Name="IDCTHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDHoaDon" Type="int" Nullable="false" />
+          <Property Name="IDMeNu" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
+          <Property Name="Gia" Type="float" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="IDHoaDon" />
+          </Key>
+          <Property Name="IDHoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDBan" Type="int" Nullable="false" />
+          <Property Name="IDNhanVien" Type="int" Nullable="false" />
+          <Property Name="NgayLap" Type="datetime" Nullable="false" />
+          <Property Name="TongTien" Type="float" Nullable="false" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="IDMeNu" />
+          </Key>
+          <Property Name="IDMeNu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenMon" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IDNhom" Type="int" Nullable="false" />
+          <Property Name="DonViTinh" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gia" Type="float" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="IDNhanVien" />
+          </Key>
+          <Property Name="IDNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoVaTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="NgaySinh" Type="datetime" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+          <Property Name="SDT" Type="varchar" MaxLength="20" />
+          <Property Name="CMND" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NHOMMON">
+          <Key>
+            <PropertyRef Name="IDNhom" />
+          </Key>
+          <Property Name="IDNhom" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNhom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="IDTaiKhoan" />
+          </Key>
+          <Property Name="IDTaiKhoan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDNhanVien" Type="int" Nullable="false" />
+          <Property Name="TaiKhoan" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MatKhau" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhanQuyen" Type="bit" Nullable="false" />
+          <Property Name="TinhTrang" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CT_HOADON__IDMeN__2A4B4B5E">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="CT_HOADON" Type="Self.CT_HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="IDMeNu" />
+            </Principal>
+            <Dependent Role="CT_HOADON">
+              <PropertyRef Name="IDMeNu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CT_HOADON__TinhT__29572725">
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
+          <End Role="CT_HOADON" Type="Self.CT_HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="IDHoaDon" />
+            </Principal>
+            <Dependent Role="CT_HOADON">
+              <PropertyRef Name="IDHoaDon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HOADON__IDNhanVi__239E4DCF">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="IDNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HOADON__TinhTran__22AA2996">
+          <End Role="BAN" Type="Self.BAN" Multiplicity="1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAN">
+              <PropertyRef Name="IDBan" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="IDBan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MENU__TinhTrang__1ED998B2">
+          <End Role="NHOMMON" Type="Self.NHOMMON" Multiplicity="1" />
+          <End Role="MENU" Type="Self.MENU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMMON">
+              <PropertyRef Name="IDNhom" />
+            </Principal>
+            <Dependent Role="MENU">
+              <PropertyRef Name="IDNhom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TAIKHOAN__TinhTr__145C0A3F">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="TAIKHOAN">
+              <PropertyRef Name="IDNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CapNhatIDbantrongHD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idhd" Type="int" Mode="In" />
+          <Parameter Name="idban" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CapNhatTongTien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idban" Type="int" Mode="In" />
+          <Parameter Name="tamtinh" Type="float" Mode="In" />
+        </Function>
+        <Function Name="ChuyenTrangThai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idban" Type="int" Mode="In" />
+          <Parameter Name="trangthai" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DangNhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DoanhThu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tungay" Type="datetime" Mode="In" />
+          <Parameter Name="denngay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="DoiMatKhau" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DsBanTrong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DSMonTheoNhom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnhom" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DSNVChuacoTK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="HDCThanhToan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tungay" Type="datetime" Mode="In" />
+          <Parameter Name="denngay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="HDDThanhToan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tungay" Type="datetime" Mode="In" />
+          <Parameter Name="denngay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="HDThanhToan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idhd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="HDTungBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idban" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IDHoaDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="IDNhom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tennhom" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="KiemTraCmnd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cmnd" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="KiemTraQuyen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="nvarchar" Mode="In" />
+          <Parameter Name="quyen" Type="int" Mode="In" />
+        </Function>
+        <Function Name="KiemTraTrungLap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="KTDoiMatKhau" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="KTHoaDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idban" Type="int" Mode="In" />
+        </Function>
+        <Function Name="KTNhomMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tennhom" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="KTTaiKhoanNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnv" Type="int" Mode="In" />
+        </Function>
+        <Function Name="KTTenban" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tenban" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="KTTrungLapMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tenmon" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LayDanhSachBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LaydanhsachCT_HD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idhd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LayDanhSachHD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LayDanhSachMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LayDanhSachNhomMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LayDanhSachNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LayDanhSachTK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LayHDThanhToan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idhd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LayThongTinMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmenu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LayThongTinTheoBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idban" Type="int" Mode="In" />
+        </Function>
+        <Function Name="NguoiDungTK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SuaMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmon" Type="int" Mode="In" />
+          <Parameter Name="tenmon" Type="nvarchar" Mode="In" />
+          <Parameter Name="idnhom" Type="int" Mode="In" />
+          <Parameter Name="donvitinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="gia" Type="float" Mode="In" />
+        </Function>
+        <Function Name="SuaNhomMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnhom" Type="int" Mode="In" />
+          <Parameter Name="tennhom" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SuaNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnhanvien" Type="int" Mode="In" />
+          <Parameter Name="hovaten" Type="nvarchar" Mode="In" />
+          <Parameter Name="gioitinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaysinh" Type="datetime" Mode="In" />
+          <Parameter Name="diachi" Type="nvarchar" Mode="In" />
+          <Parameter Name="sdt" Type="varchar" Mode="In" />
+          <Parameter Name="cmnd" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="TachCT_HD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idhdmoi" Type="int" Mode="In" />
+          <Parameter Name="idhdcu" Type="int" Mode="In" />
+          <Parameter Name="idmenu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TaiKhoanNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnv" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TangBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tenban" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="TenNhom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnhom" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThanhToanHD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idhd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThemCTHD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idhoadon" Type="int" Mode="In" />
+          <Parameter Name="idmenu" Type="int" Mode="In" />
+          <Parameter Name="soluong" Type="int" Mode="In" />
+          <Parameter Name="gia" Type="float" Mode="In" />
+        </Function>
+        <Function Name="ThemHoaDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idban" Type="int" Mode="In" />
+          <Parameter Name="idnv" Type="int" Mode="In" />
+          <Parameter Name="tamtinh" Type="float" Mode="In" />
+        </Function>
+        <Function Name="ThemMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tenmon" Type="nvarchar" Mode="In" />
+          <Parameter Name="idnhom" Type="int" Mode="In" />
+          <Parameter Name="donvitinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="gia" Type="float" Mode="In" />
+        </Function>
+        <Function Name="ThemNhomMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tennhom" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ThemNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hovaten" Type="nvarchar" Mode="In" />
+          <Parameter Name="gioitinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="diachi" Type="nvarchar" Mode="In" />
+          <Parameter Name="sdt" Type="varchar" Mode="In" />
+          <Parameter Name="cmnd" Type="varchar" Mode="In" />
+          <Parameter Name="ngaysinh" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThemTK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnv" Type="int" Mode="In" />
+          <Parameter Name="taikhoan" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+          <Parameter Name="phanquyen" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ThongKe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tungay" Type="datetime" Mode="In" />
+          <Parameter Name="denngay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="TimKiemHDTheoNgay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ngay" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="TongTienSauTach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idban" Type="int" Mode="In" />
+          <Parameter Name="tongtienmoi" Type="float" Mode="In" />
+        </Function>
+        <Function Name="XoaBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idban" Type="int" Mode="In" />
+        </Function>
+        <Function Name="XoaMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idmon" Type="int" Mode="In" />
+        </Function>
+        <Function Name="XoaNhomMon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnhom" Type="int" Mode="In" />
+        </Function>
+        <Function Name="XoaNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idnhanvien" Type="int" Mode="In" />
+        </Function>
+        <Function Name="XoaTK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taikhoan" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="QuanLyQuanCafeModelStoreContainer">
+          <EntitySet Name="BAN" EntityType="Self.BAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CT_HOADON" EntityType="Self.CT_HOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MENU" EntityType="Self.MENU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHOMMON" EntityType="Self.NHOMMON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CT_HOADON__IDMeN__2A4B4B5E" Association="Self.FK__CT_HOADON__IDMeN__2A4B4B5E">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="CT_HOADON" EntitySet="CT_HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CT_HOADON__TinhT__29572725" Association="Self.FK__CT_HOADON__TinhT__29572725">
+            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="CT_HOADON" EntitySet="CT_HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HOADON__IDNhanVi__239E4DCF" Association="Self.FK__HOADON__IDNhanVi__239E4DCF">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HOADON__TinhTran__22AA2996" Association="Self.FK__HOADON__TinhTran__22AA2996">
+            <End Role="BAN" EntitySet="BAN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MENU__TinhTrang__1ED998B2" Association="Self.FK__MENU__TinhTrang__1ED998B2">
+            <End Role="NHOMMON" EntitySet="NHOMMON" />
+            <End Role="MENU" EntitySet="MENU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TAIKHOAN__TinhTr__145C0A3F" Association="Self.FK__TAIKHOAN__TinhTr__145C0A3F">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLyQuanCafeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BAN">
+          <Key>
+            <PropertyRef Name="IDBan" />
+          </Key>
+          <Property Name="IDBan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenBan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HOADON" Relationship="Self.FK__HOADON__TinhTran__22AA2996" FromRole="BAN" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="CT_HOADON">
+          <Key>
+            <PropertyRef Name="IDCTHD" />
+          </Key>
+          <Property Name="IDCTHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDHoaDon" Type="Int32" Nullable="false" />
+          <Property Name="IDMeNu" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <Property Name="Gia" Type="Double" Nullable="false" />
+          <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MENU" Relationship="Self.FK__CT_HOADON__IDMeN__2A4B4B5E" FromRole="CT_HOADON" ToRole="MENU" />
+          <NavigationProperty Name="HOADON" Relationship="Self.FK__CT_HOADON__TinhT__29572725" FromRole="CT_HOADON" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="IDHoaDon" />
+          </Key>
+          <Property Name="IDHoaDon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDBan" Type="Int32" Nullable="false" />
+          <Property Name="IDNhanVien" Type="Int32" Nullable="false" />
+          <Property Name="NgayLap" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TongTien" Type="Double" Nullable="false" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+          <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BAN" Relationship="Self.FK__HOADON__TinhTran__22AA2996" FromRole="HOADON" ToRole="BAN" />
+          <NavigationProperty Name="CT_HOADON" Relationship="Self.FK__CT_HOADON__TinhT__29572725" FromRole="HOADON" ToRole="CT_HOADON" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__HOADON__IDNhanVi__239E4DCF" FromRole="HOADON" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="IDMeNu" />
+          </Key>
+          <Property Name="IDMeNu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenMon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDNhom" Type="Int32" Nullable="false" />
+          <Property Name="DonViTinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gia" Type="Double" Nullable="false" />
+          <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CT_HOADON" Relationship="Self.FK__CT_HOADON__IDMeN__2A4B4B5E" FromRole="MENU" ToRole="CT_HOADON" />
+          <NavigationProperty Name="NHOMMON" Relationship="Self.FK__MENU__TinhTrang__1ED998B2" FromRole="MENU" ToRole="NHOMMON" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="IDNhanVien" />
+          </Key>
+          <Property Name="IDNhanVien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoVaTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CMND" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HOADON" Relationship="Self.FK__HOADON__IDNhanVi__239E4DCF" FromRole="NHANVIEN" ToRole="HOADON" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="Self.FK__TAIKHOAN__TinhTr__145C0A3F" FromRole="NHANVIEN" ToRole="TAIKHOAN" />
+        </EntityType>
+        <EntityType Name="NHOMMON">
+          <Key>
+            <PropertyRef Name="IDNhom" />
+          </Key>
+          <Property Name="IDNhom" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNhom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MENU" Relationship="Self.FK__MENU__TinhTrang__1ED998B2" FromRole="NHOMMON" ToRole="MENU" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="IDTaiKhoan" />
+          </Key>
+          <Property Name="IDTaiKhoan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDNhanVien" Type="Int32" Nullable="false" />
+          <Property Name="TaiKhoan1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhanQuyen" Type="Boolean" Nullable="false" />
+          <Property Name="TinhTrang" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__TAIKHOAN__TinhTr__145C0A3F" FromRole="TAIKHOAN" ToRole="NHANVIEN" />
+        </EntityType>
+        <Association Name="FK__HOADON__TinhTran__22AA2996">
+          <End Role="BAN" Type="Self.BAN" Multiplicity="1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAN">
+              <PropertyRef Name="IDBan" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="IDBan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CT_HOADON__IDMeN__2A4B4B5E">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="CT_HOADON" Type="Self.CT_HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="IDMeNu" />
+            </Principal>
+            <Dependent Role="CT_HOADON">
+              <PropertyRef Name="IDMeNu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CT_HOADON__TinhT__29572725">
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
+          <End Role="CT_HOADON" Type="Self.CT_HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="IDHoaDon" />
+            </Principal>
+            <Dependent Role="CT_HOADON">
+              <PropertyRef Name="IDHoaDon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HOADON__IDNhanVi__239E4DCF">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="IDNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MENU__TinhTrang__1ED998B2">
+          <End Role="NHOMMON" Type="Self.NHOMMON" Multiplicity="1" />
+          <End Role="MENU" Type="Self.MENU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHOMMON">
+              <PropertyRef Name="IDNhom" />
+            </Principal>
+            <Dependent Role="MENU">
+              <PropertyRef Name="IDNhom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TAIKHOAN__TinhTr__145C0A3F">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="TAIKHOAN">
+              <PropertyRef Name="IDNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyQuanCafeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BAN" EntityType="Self.BAN" />
+          <EntitySet Name="CT_HOADON" EntityType="Self.CT_HOADON" />
+          <EntitySet Name="HOADON" EntityType="Self.HOADON" />
+          <EntitySet Name="MENU" EntityType="Self.MENU" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" />
+          <EntitySet Name="NHOMMON" EntityType="Self.NHOMMON" />
+          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" />
+          <AssociationSet Name="FK__HOADON__TinhTran__22AA2996" Association="Self.FK__HOADON__TinhTran__22AA2996">
+            <End Role="BAN" EntitySet="BAN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CT_HOADON__IDMeN__2A4B4B5E" Association="Self.FK__CT_HOADON__IDMeN__2A4B4B5E">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="CT_HOADON" EntitySet="CT_HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CT_HOADON__TinhT__29572725" Association="Self.FK__CT_HOADON__TinhT__29572725">
+            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="CT_HOADON" EntitySet="CT_HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HOADON__IDNhanVi__239E4DCF" Association="Self.FK__HOADON__IDNhanVi__239E4DCF">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MENU__TinhTrang__1ED998B2" Association="Self.FK__MENU__TinhTrang__1ED998B2">
+            <End Role="NHOMMON" EntitySet="NHOMMON" />
+            <End Role="MENU" EntitySet="MENU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TAIKHOAN__TinhTr__145C0A3F" Association="Self.FK__TAIKHOAN__TinhTr__145C0A3F">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+          </AssociationSet>
+          <FunctionImport Name="CapNhatIDbantrongHD">
+            <Parameter Name="idhd" Mode="In" Type="Int32" />
+            <Parameter Name="idban" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CapNhatTongTien">
+            <Parameter Name="idban" Mode="In" Type="Int32" />
+            <Parameter Name="tamtinh" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="ChuyenTrangThai">
+            <Parameter Name="idban" Mode="In" Type="Int32" />
+            <Parameter Name="trangthai" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DangNhap" ReturnType="Collection(QuanLyQuanCafeModel.DangNhap_Result)">
+            <Parameter Name="taikhoan" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DoanhThu" ReturnType="Collection(Double)">
+            <Parameter Name="tungay" Mode="In" Type="DateTime" />
+            <Parameter Name="denngay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DoiMatKhau">
+            <Parameter Name="taikhoan" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DsBanTrong" ReturnType="Collection(QuanLyQuanCafeModel.DsBanTrong_Result)" />
+          <FunctionImport Name="DSMonTheoNhom" ReturnType="Collection(QuanLyQuanCafeModel.DSMonTheoNhom_Result)">
+          <Parameter Name="idnhom" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="HDCThanhToan" ReturnType="Collection(Int32)">
+            <Parameter Name="tungay" Mode="In" Type="DateTime" />
+            <Parameter Name="denngay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="HDDThanhToan" ReturnType="Collection(Int32)">
+            <Parameter Name="tungay" Mode="In" Type="DateTime" />
+            <Parameter Name="denngay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="HDTungBan" ReturnType="Collection(QuanLyQuanCafeModel.HDTungBan_Result)">
+          <Parameter Name="idban" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IDHoaDon" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="IDNhom" ReturnType="Collection(Int32)">
+          <Parameter Name="tennhom" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="KiemTraCmnd" ReturnType="Collection(QuanLyQuanCafeModel.KiemTraCmnd_Result)">
+          <Parameter Name="cmnd" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="KiemTraQuyen" ReturnType="Collection(QuanLyQuanCafeModel.KiemTraQuyen_Result)">
+            <Parameter Name="taikhoan" Mode="In" Type="String" />
+            <Parameter Name="quyen" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="KiemTraTrungLap" ReturnType="Collection(QuanLyQuanCafeModel.KiemTraTrungLap_Result)">
+          <Parameter Name="taikhoan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="KTDoiMatKhau" ReturnType="Collection(QuanLyQuanCafeModel.KTDoiMatKhau_Result)">
+            <Parameter Name="taikhoan" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="KTHoaDon" ReturnType="Collection(QuanLyQuanCafeModel.KTHoaDon_Result)">
+          <Parameter Name="idban" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="KTNhomMon" ReturnType="Collection(QuanLyQuanCafeModel.KTNhomMon_Result)">
+          <Parameter Name="tennhom" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="KTTrungLapMon" ReturnType="Collection(QuanLyQuanCafeModel.KTTrungLapMon_Result)">
+          <Parameter Name="tenmon" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LayDanhSachBan" ReturnType="Collection(QuanLyQuanCafeModel.LayDanhSachBan_Result)" />
+          <FunctionImport Name="LaydanhsachCT_HD" ReturnType="Collection(QuanLyQuanCafeModel.LaydanhsachCT_HD_Result)">
+          <Parameter Name="idhd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LayDanhSachHD" ReturnType="Collection(QuanLyQuanCafeModel.LayDanhSachHD_Result)" />
+          <FunctionImport Name="LayDanhSachMenu" ReturnType="Collection(QuanLyQuanCafeModel.LayDanhSachMenu_Result)" />
+          <FunctionImport Name="LayDanhSachNhomMon" ReturnType="Collection(QuanLyQuanCafeModel.LayDanhSachNhomMon_Result)" />
+          <FunctionImport Name="LayDanhSachNV" ReturnType="Collection(QuanLyQuanCafeModel.LayDanhSachNV_Result)" />
+          <FunctionImport Name="LayDanhSachTK" ReturnType="Collection(QuanLyQuanCafeModel.LayDanhSachTK_Result)" />
+          <FunctionImport Name="LayThongTinMon" ReturnType="Collection(QuanLyQuanCafeModel.LayThongTinMon_Result)">
+          <Parameter Name="idmenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LayThongTinTheoBan" ReturnType="Collection(QuanLyQuanCafeModel.LayThongTinTheoBan_Result)">
+          <Parameter Name="idban" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QuanLyQuanCafeModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QuanLyQuanCafeModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="SuaMon">
+            <Parameter Name="idmon" Mode="In" Type="Int32" />
+            <Parameter Name="tenmon" Mode="In" Type="String" />
+            <Parameter Name="idnhom" Mode="In" Type="Int32" />
+            <Parameter Name="donvitinh" Mode="In" Type="String" />
+            <Parameter Name="gia" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="SuaNhomMon">
+            <Parameter Name="idnhom" Mode="In" Type="Int32" />
+            <Parameter Name="tennhom" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SuaNV">
+            <Parameter Name="idnhanvien" Mode="In" Type="Int32" />
+            <Parameter Name="hovaten" Mode="In" Type="String" />
+            <Parameter Name="gioitinh" Mode="In" Type="String" />
+            <Parameter Name="ngaysinh" Mode="In" Type="DateTime" />
+            <Parameter Name="diachi" Mode="In" Type="String" />
+            <Parameter Name="sdt" Mode="In" Type="String" />
+            <Parameter Name="cmnd" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TangBan">
+          <Parameter Name="tenban" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TenNhom" ReturnType="Collection(String)">
+          <Parameter Name="idnhom" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThanhToanHD">
+          <Parameter Name="idhd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThemCTHD">
+            <Parameter Name="idhoadon" Mode="In" Type="Int32" />
+            <Parameter Name="idmenu" Mode="In" Type="Int32" />
+            <Parameter Name="soluong" Mode="In" Type="Int32" />
+            <Parameter Name="gia" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="ThemHoaDon">
+            <Parameter Name="idban" Mode="In" Type="Int32" />
+            <Parameter Name="idnv" Mode="In" Type="Int32" />
+            <Parameter Name="tamtinh" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="ThemMon">
+            <Parameter Name="tenmon" Mode="In" Type="String" />
+            <Parameter Name="idnhom" Mode="In" Type="Int32" />
+            <Parameter Name="donvitinh" Mode="In" Type="String" />
+            <Parameter Name="gia" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="ThemNhomMon">
+          <Parameter Name="tennhom" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ThemNV">
+            <Parameter Name="hovaten" Mode="In" Type="String" />
+            <Parameter Name="gioitinh" Mode="In" Type="String" />
+            <Parameter Name="diachi" Mode="In" Type="String" />
+            <Parameter Name="sdt" Mode="In" Type="String" />
+            <Parameter Name="cmnd" Mode="In" Type="String" />
+            <Parameter Name="ngaysinh" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ThemTK">
+            <Parameter Name="idnv" Mode="In" Type="Int32" />
+            <Parameter Name="taikhoan" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+            <Parameter Name="phanquyen" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ThongKe" ReturnType="Collection(QuanLyQuanCafeModel.ThongKe_Result)">
+            <Parameter Name="tungay" Mode="In" Type="DateTime" />
+            <Parameter Name="denngay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="TimKiemHDTheoNgay" ReturnType="Collection(QuanLyQuanCafeModel.TimKiemHDTheoNgay_Result)">
+          <Parameter Name="ngay" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="XoaBan">
+          <Parameter Name="idban" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="XoaMon">
+          <Parameter Name="idmon" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="XoaNhomMon">
+          <Parameter Name="idnhom" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="XoaNV">
+          <Parameter Name="idnhanvien" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="XoaTK">
+          <Parameter Name="taikhoan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="HDThanhToan" ReturnType="Collection(QuanLyQuanCafeModel.HDThanhToan_Result)">
+          <Parameter Name="idhd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="KTTenban" ReturnType="Collection(QuanLyQuanCafeModel.KTTenban_Result)">
+          <Parameter Name="tenban" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NguoiDungTK" ReturnType="Collection(QuanLyQuanCafeModel.NguoiDungTK_Result)">
+          <Parameter Name="taikhoan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="KTTaiKhoanNV" ReturnType="Collection(QuanLyQuanCafeModel.KTTaiKhoanNV_Result)">
+          <Parameter Name="idnv" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TaiKhoanNV" ReturnType="Collection(QuanLyQuanCafeModel.TaiKhoanNV_Result)">
+          <Parameter Name="idnv" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DSNVChuacoTK" ReturnType="Collection(QuanLyQuanCafeModel.DSNVChuacoTK_Result)" />
+          <FunctionImport Name="LayHDThanhToan" ReturnType="Collection(QuanLyQuanCafeModel.LayHDThanhToan_Result)">
+          <Parameter Name="idhd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TachCT_HD">
+            <Parameter Name="idhdmoi" Mode="In" Type="Int32" />
+            <Parameter Name="idhdcu" Mode="In" Type="Int32" />
+            <Parameter Name="idmenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TongTienSauTach">
+            <Parameter Name="idban" Mode="In" Type="Int32" />
+            <Parameter Name="tongtienmoi" Mode="In" Type="Double" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="DangNhap_Result">
+          <Property Type="Int32" Name="IDTaiKhoan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="TaiKhoan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="PhanQuyen" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DsBanTrong_Result">
+          <Property Type="Int32" Name="IDBan" Nullable="false" />
+          <Property Type="String" Name="TenBan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TrangThai" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DSMonTheoNhom_Result">
+          <Property Type="Int32" Name="IDMeNu" Nullable="false" />
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDNhom" Nullable="false" />
+          <Property Type="String" Name="DonViTinh" Nullable="false" MaxLength="100" />
+          <Property Type="Double" Name="Gia" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="HDTungBan_Result">
+          <Property Type="Int32" Name="IDHoaDon" Nullable="false" />
+          <Property Type="Int32" Name="IDBan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="DateTime" Name="NgayLap" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="TongTien" Nullable="false" />
+          <Property Type="Boolean" Name="TrangThai" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KiemTraCmnd_Result">
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="HoVaTen" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="GioiTinh" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SDT" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CMND" Nullable="false" MaxLength="20" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KiemTraQuyen_Result">
+          <Property Type="Int32" Name="IDTaiKhoan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="TaiKhoan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="PhanQuyen" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KiemTraTrungLap_Result">
+          <Property Type="Int32" Name="IDTaiKhoan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="TaiKhoan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="PhanQuyen" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KTDoiMatKhau_Result">
+          <Property Type="Int32" Name="IDTaiKhoan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="TaiKhoan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="PhanQuyen" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KTHoaDon_Result">
+          <Property Type="Int32" Name="IDHoaDon" Nullable="false" />
+          <Property Type="Int32" Name="IDBan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="DateTime" Name="NgayLap" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="TongTien" Nullable="false" />
+          <Property Type="Boolean" Name="TrangThai" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KTNhomMon_Result">
+          <Property Type="Int32" Name="IDNhom" Nullable="false" />
+          <Property Type="String" Name="TenNhom" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KTTrungLapMon_Result">
+          <Property Type="Int32" Name="IDMeNu" Nullable="false" />
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDNhom" Nullable="false" />
+          <Property Type="String" Name="DonViTinh" Nullable="false" MaxLength="100" />
+          <Property Type="Double" Name="Gia" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayDanhSachBan_Result">
+          <Property Type="Int32" Name="IDBan" Nullable="false" />
+          <Property Type="String" Name="TenBan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TrangThai" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LaydanhsachCT_HD_Result">
+          <Property Type="Int32" Name="IDCTHD" Nullable="false" />
+          <Property Type="Int32" Name="IDHoaDon" Nullable="false" />
+          <Property Type="Int32" Name="IDMeNu" Nullable="false" />
+          <Property Type="Int32" Name="SoLuong" Nullable="false" />
+          <Property Type="Double" Name="Gia" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayDanhSachHD_Result">
+          <Property Type="Int32" Name="IDHoaDon" Nullable="false" />
+          <Property Type="Int32" Name="IDBan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="DateTime" Name="NgayLap" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="TongTien" Nullable="false" />
+          <Property Type="Boolean" Name="TrangThai" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayDanhSachMenu_Result">
+          <Property Type="Int32" Name="IDMeNu" Nullable="false" />
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDNhom" Nullable="false" />
+          <Property Type="String" Name="DonViTinh" Nullable="false" MaxLength="100" />
+          <Property Type="Double" Name="Gia" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayDanhSachNhomMon_Result">
+          <Property Type="Int32" Name="IDNhom" Nullable="false" />
+          <Property Type="String" Name="TenNhom" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayDanhSachNV_Result">
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="HoVaTen" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="GioiTinh" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SDT" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CMND" Nullable="false" MaxLength="20" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayDanhSachTK_Result">
+          <Property Type="Int32" Name="IDTaiKhoan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="TaiKhoan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="PhanQuyen" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayThongTinMon_Result">
+          <Property Type="Int32" Name="IDMeNu" Nullable="false" />
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDNhom" Nullable="false" />
+          <Property Type="String" Name="DonViTinh" Nullable="false" MaxLength="100" />
+          <Property Type="Double" Name="Gia" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayThongTinTheoBan_Result">
+          <Property Type="Int32" Name="IDBan" Nullable="false" />
+          <Property Type="String" Name="TenBan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TrangThai" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ThongKe_Result">
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="TongSL" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TimKiemHDTheoNgay_Result">
+          <Property Type="Int32" Name="IDHoaDon" Nullable="false" />
+          <Property Type="Int32" Name="IDBan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="DateTime" Name="NgayLap" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="TongTien" Nullable="false" />
+          <Property Type="Boolean" Name="TrangThai" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="HDThanhToan_Result">
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="SoLuong" Nullable="false" />
+          <Property Type="Double" Name="Gia" Nullable="false" />
+          <Property Type="Double" Name="ThanhTien" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KTTenban_Result">
+          <Property Type="Int32" Name="IDBan" Nullable="false" />
+          <Property Type="String" Name="TenBan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TrangThai" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="NguoiDungTK_Result">
+          <Property Type="String" Name="HoVaTen" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="KTTaiKhoanNV_Result">
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="HoVaTen" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="GioiTinh" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SDT" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CMND" Nullable="false" MaxLength="20" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+          <Property Type="Int32" Name="IDTaiKhoan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien1" Nullable="false" />
+          <Property Type="String" Name="TaiKhoan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="PhanQuyen" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang1" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="TaiKhoanNV_Result">
+          <Property Type="Int32" Name="IDTaiKhoan" Nullable="false" />
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="TaiKhoan" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="PhanQuyen" Nullable="false" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DSNVChuacoTK_Result">
+          <Property Type="Int32" Name="IDNhanVien" Nullable="false" />
+          <Property Type="String" Name="HoVaTen" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="GioiTinh" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="false" Precision="23" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SDT" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CMND" Nullable="false" MaxLength="20" />
+          <Property Type="Boolean" Name="TinhTrang" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LayHDThanhToan_Result">
+          <Property Type="Int32" Name="IDMeNu" Nullable="false" />
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="SoLuong" Nullable="false" />
+          <Property Type="Double" Name="Gia" Nullable="false" />
+          <Property Type="Double" Name="ThanhTien" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLyQuanCafeModelStoreContainer" CdmEntityContainer="QuanLyQuanCafeEntities">
+          <EntitySetMapping Name="BAN">
+            <EntityTypeMapping TypeName="QuanLyQuanCafeModel.BAN">
+              <MappingFragment StoreEntitySet="BAN">
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="TenBan" ColumnName="TenBan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CT_HOADON">
+            <EntityTypeMapping TypeName="QuanLyQuanCafeModel.CT_HOADON">
+              <MappingFragment StoreEntitySet="CT_HOADON">
+                <ScalarProperty Name="IDCTHD" ColumnName="IDCTHD" />
+                <ScalarProperty Name="IDHoaDon" ColumnName="IDHoaDon" />
+                <ScalarProperty Name="IDMeNu" ColumnName="IDMeNu" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOADON">
+            <EntityTypeMapping TypeName="QuanLyQuanCafeModel.HOADON">
+              <MappingFragment StoreEntitySet="HOADON">
+                <ScalarProperty Name="IDHoaDon" ColumnName="IDHoaDon" />
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENU">
+            <EntityTypeMapping TypeName="QuanLyQuanCafeModel.MENU">
+              <MappingFragment StoreEntitySet="MENU">
+                <ScalarProperty Name="IDMeNu" ColumnName="IDMeNu" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="IDNhom" ColumnName="IDNhom" />
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANVIEN">
+            <EntityTypeMapping TypeName="QuanLyQuanCafeModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHOMMON">
+            <EntityTypeMapping TypeName="QuanLyQuanCafeModel.NHOMMON">
+              <MappingFragment StoreEntitySet="NHOMMON">
+                <ScalarProperty Name="IDNhom" ColumnName="IDNhom" />
+                <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAIKHOAN">
+            <EntityTypeMapping TypeName="QuanLyQuanCafeModel.TAIKHOAN">
+              <MappingFragment StoreEntitySet="TAIKHOAN">
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="TaiKhoan1" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CapNhatIDbantrongHD" FunctionName="QuanLyQuanCafeModel.Store.CapNhatIDbantrongHD" />
+          <FunctionImportMapping FunctionImportName="CapNhatTongTien" FunctionName="QuanLyQuanCafeModel.Store.CapNhatTongTien" />
+          <FunctionImportMapping FunctionImportName="ChuyenTrangThai" FunctionName="QuanLyQuanCafeModel.Store.ChuyenTrangThai" />
+          <FunctionImportMapping FunctionImportName="DangNhap" FunctionName="QuanLyQuanCafeModel.Store.DangNhap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.DangNhap_Result">
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DoanhThu" FunctionName="QuanLyQuanCafeModel.Store.DoanhThu" />
+          <FunctionImportMapping FunctionImportName="DoiMatKhau" FunctionName="QuanLyQuanCafeModel.Store.DoiMatKhau" />
+          <FunctionImportMapping FunctionImportName="DsBanTrong" FunctionName="QuanLyQuanCafeModel.Store.DsBanTrong">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.DsBanTrong_Result">
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="TenBan" ColumnName="TenBan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DSMonTheoNhom" FunctionName="QuanLyQuanCafeModel.Store.DSMonTheoNhom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.DSMonTheoNhom_Result">
+                <ScalarProperty Name="IDMeNu" ColumnName="IDMeNu" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="IDNhom" ColumnName="IDNhom" />
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="HDCThanhToan" FunctionName="QuanLyQuanCafeModel.Store.HDCThanhToan" />
+          <FunctionImportMapping FunctionImportName="HDDThanhToan" FunctionName="QuanLyQuanCafeModel.Store.HDDThanhToan" />
+          <FunctionImportMapping FunctionImportName="HDTungBan" FunctionName="QuanLyQuanCafeModel.Store.HDTungBan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.HDTungBan_Result">
+                <ScalarProperty Name="IDHoaDon" ColumnName="IDHoaDon" />
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IDHoaDon" FunctionName="QuanLyQuanCafeModel.Store.IDHoaDon" />
+          <FunctionImportMapping FunctionImportName="IDNhom" FunctionName="QuanLyQuanCafeModel.Store.IDNhom" />
+          <FunctionImportMapping FunctionImportName="KiemTraCmnd" FunctionName="QuanLyQuanCafeModel.Store.KiemTraCmnd">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KiemTraCmnd_Result">
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KiemTraQuyen" FunctionName="QuanLyQuanCafeModel.Store.KiemTraQuyen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KiemTraQuyen_Result">
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KiemTraTrungLap" FunctionName="QuanLyQuanCafeModel.Store.KiemTraTrungLap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KiemTraTrungLap_Result">
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KTDoiMatKhau" FunctionName="QuanLyQuanCafeModel.Store.KTDoiMatKhau">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KTDoiMatKhau_Result">
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KTHoaDon" FunctionName="QuanLyQuanCafeModel.Store.KTHoaDon">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KTHoaDon_Result">
+                <ScalarProperty Name="IDHoaDon" ColumnName="IDHoaDon" />
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KTNhomMon" FunctionName="QuanLyQuanCafeModel.Store.KTNhomMon">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KTNhomMon_Result">
+                <ScalarProperty Name="IDNhom" ColumnName="IDNhom" />
+                <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KTTrungLapMon" FunctionName="QuanLyQuanCafeModel.Store.KTTrungLapMon">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KTTrungLapMon_Result">
+                <ScalarProperty Name="IDMeNu" ColumnName="IDMeNu" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="IDNhom" ColumnName="IDNhom" />
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayDanhSachBan" FunctionName="QuanLyQuanCafeModel.Store.LayDanhSachBan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayDanhSachBan_Result">
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="TenBan" ColumnName="TenBan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LaydanhsachCT_HD" FunctionName="QuanLyQuanCafeModel.Store.LaydanhsachCT_HD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LaydanhsachCT_HD_Result">
+                <ScalarProperty Name="IDCTHD" ColumnName="IDCTHD" />
+                <ScalarProperty Name="IDHoaDon" ColumnName="IDHoaDon" />
+                <ScalarProperty Name="IDMeNu" ColumnName="IDMeNu" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayDanhSachHD" FunctionName="QuanLyQuanCafeModel.Store.LayDanhSachHD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayDanhSachHD_Result">
+                <ScalarProperty Name="IDHoaDon" ColumnName="IDHoaDon" />
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayDanhSachMenu" FunctionName="QuanLyQuanCafeModel.Store.LayDanhSachMenu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayDanhSachMenu_Result">
+                <ScalarProperty Name="IDMeNu" ColumnName="IDMeNu" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="IDNhom" ColumnName="IDNhom" />
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayDanhSachNhomMon" FunctionName="QuanLyQuanCafeModel.Store.LayDanhSachNhomMon">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayDanhSachNhomMon_Result">
+                <ScalarProperty Name="IDNhom" ColumnName="IDNhom" />
+                <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayDanhSachNV" FunctionName="QuanLyQuanCafeModel.Store.LayDanhSachNV">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayDanhSachNV_Result">
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayDanhSachTK" FunctionName="QuanLyQuanCafeModel.Store.LayDanhSachTK">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayDanhSachTK_Result">
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayThongTinMon" FunctionName="QuanLyQuanCafeModel.Store.LayThongTinMon">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayThongTinMon_Result">
+                <ScalarProperty Name="IDMeNu" ColumnName="IDMeNu" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="IDNhom" ColumnName="IDNhom" />
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayThongTinTheoBan" FunctionName="QuanLyQuanCafeModel.Store.LayThongTinTheoBan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayThongTinTheoBan_Result">
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="TenBan" ColumnName="TenBan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="QuanLyQuanCafeModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="QuanLyQuanCafeModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="QuanLyQuanCafeModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="QuanLyQuanCafeModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="QuanLyQuanCafeModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QuanLyQuanCafeModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QuanLyQuanCafeModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="SuaMon" FunctionName="QuanLyQuanCafeModel.Store.SuaMon" />
+          <FunctionImportMapping FunctionImportName="SuaNhomMon" FunctionName="QuanLyQuanCafeModel.Store.SuaNhomMon" />
+          <FunctionImportMapping FunctionImportName="SuaNV" FunctionName="QuanLyQuanCafeModel.Store.SuaNV" />
+          <FunctionImportMapping FunctionImportName="TangBan" FunctionName="QuanLyQuanCafeModel.Store.TangBan" />
+          <FunctionImportMapping FunctionImportName="TenNhom" FunctionName="QuanLyQuanCafeModel.Store.TenNhom" />
+          <FunctionImportMapping FunctionImportName="ThanhToanHD" FunctionName="QuanLyQuanCafeModel.Store.ThanhToanHD" />
+          <FunctionImportMapping FunctionImportName="ThemCTHD" FunctionName="QuanLyQuanCafeModel.Store.ThemCTHD" />
+          <FunctionImportMapping FunctionImportName="ThemHoaDon" FunctionName="QuanLyQuanCafeModel.Store.ThemHoaDon" />
+          <FunctionImportMapping FunctionImportName="ThemMon" FunctionName="QuanLyQuanCafeModel.Store.ThemMon" />
+          <FunctionImportMapping FunctionImportName="ThemNhomMon" FunctionName="QuanLyQuanCafeModel.Store.ThemNhomMon" />
+          <FunctionImportMapping FunctionImportName="ThemNV" FunctionName="QuanLyQuanCafeModel.Store.ThemNV" />
+          <FunctionImportMapping FunctionImportName="ThemTK" FunctionName="QuanLyQuanCafeModel.Store.ThemTK" />
+          <FunctionImportMapping FunctionImportName="ThongKe" FunctionName="QuanLyQuanCafeModel.Store.ThongKe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.ThongKe_Result">
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="TongSL" ColumnName="TongSL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TimKiemHDTheoNgay" FunctionName="QuanLyQuanCafeModel.Store.TimKiemHDTheoNgay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.TimKiemHDTheoNgay_Result">
+                <ScalarProperty Name="IDHoaDon" ColumnName="IDHoaDon" />
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="XoaBan" FunctionName="QuanLyQuanCafeModel.Store.XoaBan" />
+          <FunctionImportMapping FunctionImportName="XoaMon" FunctionName="QuanLyQuanCafeModel.Store.XoaMon" />
+          <FunctionImportMapping FunctionImportName="XoaNhomMon" FunctionName="QuanLyQuanCafeModel.Store.XoaNhomMon" />
+          <FunctionImportMapping FunctionImportName="XoaNV" FunctionName="QuanLyQuanCafeModel.Store.XoaNV" />
+          <FunctionImportMapping FunctionImportName="XoaTK" FunctionName="QuanLyQuanCafeModel.Store.XoaTK" />
+          <FunctionImportMapping FunctionImportName="HDThanhToan" FunctionName="QuanLyQuanCafeModel.Store.HDThanhToan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.HDThanhToan_Result">
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KTTenban" FunctionName="QuanLyQuanCafeModel.Store.KTTenban">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KTTenban_Result">
+                <ScalarProperty Name="IDBan" ColumnName="IDBan" />
+                <ScalarProperty Name="TenBan" ColumnName="TenBan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="NguoiDungTK" FunctionName="QuanLyQuanCafeModel.Store.NguoiDungTK">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.NguoiDungTK_Result">
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KTTaiKhoanNV" FunctionName="QuanLyQuanCafeModel.Store.KTTaiKhoanNV">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.KTTaiKhoanNV_Result">
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="IDNhanVien1" ColumnName="IDNhanVien1" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+                <ScalarProperty Name="TinhTrang1" ColumnName="TinhTrang1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TaiKhoanNV" FunctionName="QuanLyQuanCafeModel.Store.TaiKhoanNV">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.TaiKhoanNV_Result">
+                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DSNVChuacoTK" FunctionName="QuanLyQuanCafeModel.Store.DSNVChuacoTK">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.DSNVChuacoTK_Result">
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayHDThanhToan" FunctionName="QuanLyQuanCafeModel.Store.LayHDThanhToan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLyQuanCafeModel.LayHDThanhToan_Result">
+                <ScalarProperty Name="IDMeNu" ColumnName="IDMeNu" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TachCT_HD" FunctionName="QuanLyQuanCafeModel.Store.TachCT_HD" />
+          <FunctionImportMapping FunctionImportName="TongTienSauTach" FunctionName="QuanLyQuanCafeModel.Store.TongTienSauTach" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
